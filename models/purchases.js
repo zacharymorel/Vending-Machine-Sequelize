@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
     {
       ItemId: DataTypes.INTEGER,
       Purchase: DataTypes.DATE,
-      MoneyInMachine: DataTypes.DECIMAL
+      MoneyInMachine: DataTypes.DECIMAL,
+      ChangeBack: DataTypes.DECIMAL
     },
     {
       classMethods: {

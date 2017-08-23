@@ -21,7 +21,8 @@ customer.post('/api/customer/items/:itemId/purchases', (request, response) => {
     const purchase = models.Purchases.build({
       MoneyInMachine: item.ItemCost,
       ItemId: item.id,
-      Purchase: Date.now()
+      Purchase: Date.now(),
+      ChangeBack: changeBack
     })
     purchase.save().then(moneyReturnToUser => {
       response.json(moneyReturnToUser)
