@@ -13,20 +13,21 @@ customer.get('/api/customer/items', (request, response) => {
     })
 })
 
-customer.post('/api/customer/items/:id/purchases', (request, response) => {
-  // Purchasing an Item // <-- SELECT
-  models.Items.findById(request.params.id).then(item => {
-    let userMoney = request.body.amount - item.ItemCost
-    console.log(request.body.amount, item.ItemCost)
+customer.post('/api/customer/items/:itemId/purchases', (request, response) => {
+  // Purchasing an Item
+  models.Items.findById(request.params.itemId).then(item => {
+    let changeBack = request.body.amount - item.ItemCost
+    // console.log(request.body.amount, item.ItemCost)
     const purchase = models.Purchases.build({
-      MoneyInMachine: userMoney,
-      ItemId: item.id
+      MoneyInMachine: item.ItemCost,
+      ItemId: item.id,
+      Purchase: Date.now()
     })
     purchase.save().then(moneyReturnToUser => {
       response.json(moneyReturnToUser)
     })
   })
-
+  // <-- SELECT
   // <--- look at request body, and subract amound given from cost
   // <--- take that number and INSERT a purchase
   // response.json(purchase) <-- then respond with the purchase
