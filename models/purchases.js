@@ -16,8 +16,5 @@ module.exports = function(sequelize, DataTypes) {
     }
   )
 
-  // Set the belongsto relationship
-  Purchases.belongsto(Item)
-
   return Purchases
 }
