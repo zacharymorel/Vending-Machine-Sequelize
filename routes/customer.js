@@ -2,6 +2,7 @@ const express = require('express')
 const customer = express.Router()
 const models = require('../models')
 
+// SHOWING ALL THE ITEM OPTIONS FOR CUSTOMER
 customer.get('/api/customer/items', (request, response) => {
   models.Items
     .findAll()
