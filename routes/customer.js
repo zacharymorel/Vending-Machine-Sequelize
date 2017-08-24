@@ -17,7 +17,7 @@ customer.get('/api/customer/items', (request, response) => {
 customer.post('/api/customer/items/:itemId/purchases', (request, response) => {
   // Purchasing an Item
   models.Items.findById(request.params.itemId).then(item => {
-    if (item.Quantity > 0) {
+    if (item.Quantity > 0 && request.body.amount >= item.ItemCost) {
       let changeBack = request.body.amount - item.ItemCost
       const purchase = models.Purchases.build({
         MoneyInMachine: item.ItemCost,
@@ -32,7 +32,7 @@ customer.post('/api/customer/items/:itemId/purchases', (request, response) => {
         response.json(moneyReturnToUser)
       })
     } else {
-      response.json('sorry, we do not have this item in our inventory.')
+      response.json('sorry, we do not have this item in our inventory, or please check amount given.')
     }
   })
 })
