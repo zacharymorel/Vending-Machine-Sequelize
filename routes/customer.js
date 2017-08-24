@@ -24,13 +24,20 @@ customer.post('/api/customer/items/:itemId/purchases', (request, response) => {
       Purchase: Date.now(),
       ChangeBack: changeBack
     })
+
+    item.Quantity -= 1
+    item.save().then(item => {
+      console.log('Updated the qty')
+    })
     purchase.save().then(moneyReturnToUser => {
       response.json(moneyReturnToUser)
     })
   })
-  // <-- SELECT
-  // <--- look at request body, and subract amound given from cost
-  // <--- take that number and INSERT a purchase
-  // response.json(purchase) <-- then respond with the purchase
+  // <-- SELECT *
+  // <--- look at request body, and subract amound given from cost *
+  // <--- take that number and INSERT a purchase *
+  // <--- Minus purchase quant: 1 from quanity when purchasing *
+  // <--- Add constraint to Quanity in Item table so that if 0 quanity, transaction rolls back to start.
+  // response.json(purchase) <-- then respond with the purchase *
 })
 module.exports = customer
