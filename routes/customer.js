@@ -35,12 +35,12 @@ customer.post('/api/customer/items/:itemId/purchases', (request, response) => {
       response.json('sorry, we do not have this item in our inventory.')
     }
   })
-  // <-- SELECT *
-  // <--- look at request body, and subract amound given from cost *
-  // <--- take that number and INSERT a purchase *
-  // <--- Minus purchase quant: 1 from quanity when purchasing *
-  // <--- Add constraint to Quanity in Item table so that if 0 quanity, transaction rolls back to start.
-  //  ^^HARD MODE
-  // response.json(purchase) <-- then respond with the purchase *
 })
+// <-- SELECT *
+// <--- look at request body, and subract amound given from cost *
+// <--- take that number and INSERT a purchase *
+// <--- Minus purchase quant: 1 from quanity when purchasing *
+// <--- Add constraint to Quanity in Item table so that if 0 quanity, transaction rolls back to start.
+//  ^^HARD MODE
+// response.json(purchase) <-- then respond with the purchase *
 module.exports = customer

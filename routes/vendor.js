@@ -35,5 +35,18 @@ vendor.post('/api/vendor/items', (request, response) => {
 })
 
 // UPDATE AN ITEM, UQANTITY, COST
-vendor.put('/api/vendor/items/:itemId', (request, response) => {})
+vendor.put('/api/vendor/items/:itemId', (request, response) => {
+  models.Items.findById(request.params.itemId).then(item => {
+    item
+      .update({
+        nameOfItem: request.body.nameOfItem,
+        ItemCost: request.body.ItemCost,
+        Quantity: request.body.Quantity
+      })
+      .then(item => {
+        response.json(item)
+      })
+  })
+})
+
 module.exports = vendor
