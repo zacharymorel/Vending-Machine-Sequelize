@@ -17,21 +17,23 @@ customer.get('/api/customer/items', (request, response) => {
 customer.post('/api/customer/items/:itemId/purchases', (request, response) => {
   // Purchasing an Item
   models.Items.findById(request.params.itemId).then(item => {
-    let changeBack = request.body.amount - item.ItemCost
-    const purchase = models.Purchases.build({
-      MoneyInMachine: item.ItemCost,
-      ItemId: item.id,
-      Purchase: Date.now(),
-      ChangeBack: changeBack
-    })
+    if (item.Quantity > 0) {
+      let changeBack = request.body.amount - item.ItemCost
+      const purchase = models.Purchases.build({
+        MoneyInMachine: item.ItemCost,
+        ItemId: item.id,
+        Purchase: Date.now(),
+        ChangeBack: changeBack
+      })
 
-    item.Quantity -= 1
-    item.save().then(item => {
-      console.log('Updated the qty')
-    })
-    purchase.save().then(moneyReturnToUser => {
-      response.json(moneyReturnToUser)
-    })
+      item.Quantity -= 1
+      item.save().then(item => {})
+      purchase.save().then(moneyReturnToUser => {
+        response.json(moneyReturnToUser)
+      })
+    } else {
+      response.json('sorry, we do not have this item in our inventory.')
+    }
   })
   // <-- SELECT *
   // <--- look at request body, and subract amound given from cost *

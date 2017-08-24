@@ -33,4 +33,7 @@ vendor.post('/api/vendor/items', (request, response) => {
       response.json(item)
     })
 })
+
+// UPDATE AN ITEM, UQANTITY, COST
+vendor.put('/api/vendor/items/:itemId', (request, response) => {})
 module.exports = vendor
