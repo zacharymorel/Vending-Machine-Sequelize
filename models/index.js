@@ -33,8 +33,4 @@ Object.keys(models).forEach(function(modelName) {
 models.sequelize = sequelize
 models.Sequelize = Sequelize
 
-// SET THE belongsTo RELATIONSHIP
-// TODO: There has to be a better place to put this!
-models.Purchases.belongsTo(models.Items)
-
 module.exports = models

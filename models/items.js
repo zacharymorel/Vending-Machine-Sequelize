@@ -5,7 +5,10 @@ module.exports = function(sequelize, DataTypes) {
     {
       nameOfItem: DataTypes.STRING,
       ItemCost: DataTypes.DECIMAL,
-      Quantity: DataTypes.INTEGER
+      Quantity: {
+        type: DataTypes.INTEGER,
+        valdate: { min: 0 }
+      }
     },
     {
       classMethods: {
